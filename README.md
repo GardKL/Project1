@@ -1,14 +1,19 @@
-# FYS-STK3155/4155 — Applied Data Analysis and Machine Learning
+# FYS-STK 3155/4155
 
-Coursework for FYS-STK4155 at the University of Oslo, autumn 2026.
+Coursework for FYS-STK 3155/4155 at the University of Oslo, autumn 2026.
 
-## Project 1 — Parisa and Gard
+## Project 1 — Regression, resampling and gradient descent
 
-Project 1 is a joint project by **Parisa Amin** and **Gard Kvalsvik Lilleås**.
+Polynomial regression on Runge's function f(x) = 1/(1+25x²) with OLS, Ridge and
+Lasso; bias–variance analysis with the bootstrap; model selection with k-fold
+cross-validation; and gradient-based optimisation (plain GD, momentum, AdaGrad,
+RMSProp, Adam and stochastic gradient descent).
 
-Polynomial regression on Runge's function f(x) = 1/(1+25x^2), using OLS, Ridge and
-Lasso, with the bootstrap and k-fold cross-validation, and gradient descent as the
-optimiser.
+
+Submitted by **Gard Kvalsvik Lilleås**. The project was started as a group
+project with **Parisa Amin**, who wrote parts b.5, c, e and g of the notebook.
+Parts d, f, h and i were written by Gard; parts a and b and `regression.py` were
+developed jointly.
 
 ```
 Project1/
@@ -17,10 +22,11 @@ Project1/
   report/    bibliography (the report itself is written in Overleaf)
 ```
 
-We keep separate notebooks so they do not clash in git: `Project1.ipynb` is Parisa's
-and `Project1_gard.ipynb` is Gard's. Shared functions go in `regression.py`.
+The Jupyter notebook with the code for this project is `Project1_gard.ipynb`. Library functions are found in `regression.py`.
 
 ## Running the code
+
+Run all cells from the top ("Restart and Run all").
 
 ```
 pip install -r requirements.txt
