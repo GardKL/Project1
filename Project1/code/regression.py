@@ -20,7 +20,17 @@ def runge(x):
 
 
 def make_data(n=100, sigma=0.1, seed=2026, uniform=True):
-   
+    """Return n noisy samples y = f(x) + N(0, sigma^2) of Runge's function on [-1, 1].
+
+    x is drawn uniformly (uniform=True) or equally spaced; the seed fixes the data.
+
+    LLM-assisted
+    ------------
+    Tool: Claude (Anthropic, September 2026)
+    Role: short snippet and guidance on structure (code level 2).
+    Modifications: integrated, tested in test_regression.py and benchmarked
+    against scikit-learn by the authors.
+    """
     rng= np.random.default_rng(seed)
 
     if uniform:
@@ -38,7 +48,15 @@ def make_data(n=100, sigma=0.1, seed=2026, uniform=True):
 # ---------------------------------------------------------------------------
 
 def polynomial_features(x, degree, intercept=False):
-    
+    """Design matrix [x, x^2, ..., x^degree], with a column of ones first if intercept=True.
+
+    LLM-assisted
+    ------------
+    Tool: Claude (Anthropic, September 2026)
+    Role: short snippet and guidance on structure (code level 2).
+    Modifications: integrated, tested in test_regression.py and benchmarked
+    against scikit-learn by the authors.
+    """
     X= np.vander(x, degree + 1, increasing=True)
     if not intercept:
         X= X[:, 1:]
@@ -68,11 +86,24 @@ def R2(y_data, y_model):
 # ---------------------------------------------------------------------------
 
 def ols(X, y):
+    """OLS coefficients theta = X^+ y, computed with the pseudoinverse."""
     return np.linalg.pinv(X) @ y
 
 
 # Step 5: Ridge
 def ridge(X, y, lam):
+    """Ridge coefficients theta = (X^T X + n lam I)^{-1} X^T y.
+
+    The factor n comes from the 1/n in front of the squared error in our cost,
+    so this equals scikit-learn's Ridge with alpha = n*lam.
+
+    LLM-assisted
+    ------------
+    Tool: Claude (Anthropic, September 2026)
+    Role: short snippet and guidance on structure (code level 2).
+    Modifications: integrated, tested in test_regression.py and benchmarked
+    against scikit-learn by the authors.
+    """
     n = X.shape[0]
     p = X.shape[1]
 
@@ -88,6 +119,18 @@ def ridge(X, y, lam):
 
 # Step 6: build features, scale, fit, predict
 def fit_predict(x_train, x_test, y_train, degree, lam=0.0):
+    """Build features, scale with training statistics only, fit OLS (lam=0) or Ridge, predict.
+
+    Returns (y_train_pred, y_test_pred, theta). The training mean of y is
+    subtracted before the fit and added back to the predictions.
+
+    LLM-assisted
+    ------------
+    Tool: Claude (Anthropic, September 2026)
+    Role: short snippet and guidance on structure (code level 2).
+    Modifications: integrated, tested in test_regression.py and benchmarked
+    against scikit-learn by the authors.
+    """
 
     X_train = polynomial_features(x_train, degree)
     X_test = polynomial_features(x_test, degree)
@@ -114,12 +157,3 @@ def fit_predict(x_train, x_test, y_train, degree, lam=0.0):
     y_test_pred = X_test_scaled @ theta + y_mean
 
     return y_train_pred, y_test_pred, theta
-
-
-
-#LLM-assisted (Claude): short snippets and guidance on structure; tested by the authors.
-
-
-
-
-  
