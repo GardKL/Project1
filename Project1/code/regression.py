@@ -117,6 +117,7 @@ def fit_predict(x_train, x_test, y_train, degree, lam=0.0):
 
 
 
+#LLM-assisted (Claude): short snippets and guidance on structure; tested by the authors.
 
 
 
